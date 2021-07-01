@@ -10,6 +10,8 @@ var hour5 = $("#17");
 var time = moment();
 function setPlanner() {
 
+
+	// Adds date at the top
     $("#currentDay").text(moment().format("dddd, MMMM Do YYYY"));
 
     $(".time-block").each(function () {
@@ -22,31 +24,3 @@ function setPlanner() {
     });
 }
 
-setPlanner();
-var saveBtn = $(".saveBtn");
-
-saveBtn.on("click", function () {
-    var time = $(this).parent().attr("id");
-    var schedule = $(this).siblings(".schedule").val();
-
-    localStorage.setItem(time, schedule);
-});
-
-function pastPresentFuture() {
-    hour = time.hours();
-    $(".time-block").each(function () {
-        var thisHour = parseInt($(this).attr("id"));
-
-        if (thisHour > hour) {
-            $(this).addClass("future")
-        }
-        else if (thisHour === hour) {
-            $(this).addClass("present");
-        }
-        else {
-            $(this).addClass("past");
-        }
-    })
-}
-
-pastPresentFuture();
