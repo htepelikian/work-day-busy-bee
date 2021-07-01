@@ -6,7 +6,7 @@ console.log(currentTime);
 $("#currentDay").append(date);
 
 
-var timeOfday = ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+var timeOfday = ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"];
 updatetime();
 
 function updatetime() {
@@ -30,10 +30,15 @@ function updatetime() {
 }
 
 //--Save input to local storage---//
-$(".saveBtn").on("click", function() {
+$(document).on("click", ".saveBtn", function() {
+    alert("Saved!");
     var timeOfday = $(this).parent().attr("id");
     var textContent = $("input").val().trim();
 
-    localStorage.setItem('timeOfday', 'textContent');
+    localStorage.setItem(timeOfday, textContent);
+    localStorage.getItem(timeOfday, textContent);
     console.log(timeOfday, textContent);
+
+    document.getElementById(timeOfday, textContent).innerHTML = localStorage.getItem(timeOfday, textContent);
 });
+
