@@ -1,84 +1,52 @@
-$(function () {});
-  
-/* Date variables displayed at top and hours */
-var today = moment().format("dddd, MMMM Do");
+var hour9 = $("#9");
+var hour10 = $("#10");
+var hour11 = $("#11");
+var hour12 = $("#12");
+var hour1 = $("#13");
+var hour2 = $("#14");
+var hour3 = $("#15");
+var hour4 = $("#16");
+var hour5 = $("#17");
+var time = moment();
+function setPlanner() {
 
-var now = moment().format("H A");
+    $("#currentDay").text(moment().format("dddd, MMMM Do YYYY"));
 
-/* Timeblocks */
-var plannerWorkday = [
-  { time: "8 AM", event: "" },
-  { time: "9 AM", event: "" },
-  { time: "10 AM", event: "" },
-  { time: "11 AM", event: "" },
-  { time: "12 PM", event: "" },
-  { time: "1 PM", event: "" },
-  { time: "2 PM", event: "" },
-  { time: "3 PM", event: "" },
-  { time: "4 PM", event: "" },
-  { time: "5 PM", event: "" },
-  { time: "6 PM", event: "" },
-  { time: "7 PM", event: "" },
-  { time: "8 PM", event: "" },
-];
+    $(".time-block").each(function () {
+        var id = $(this).attr("id");
+        var schedule = localStorage.getItem(id);
 
-/* Local Storage check */
-var workEvents = JSON.parse(localStorage.getItem("workDay"));
-if (workEvents) {
-  planWorkday = workEvents;
+        if (schedule !== null) {
+            $(this).children(".schedule").val(schedule);
+        }
+    });
 }
 
-/* Current Day */
-$("#currentDay").text(today);
+setPlanner();
+var saveBtn = $(".saveBtn");
 
-/* Create rows for time blocks */
-planWorkday.forEach(function(timeBlock, index) {
-	var timeLabel = timeBlock.time;
-	var blockColor = colorRow(timeLabel);
-	var row =
-		'<div class="time-block" id="' +
-		index +
-		'"><div class="row no-gutters input-group"><div class="col-sm col-lg-1 input-group-prepend hour justify-content-sm-end pr-3 pt-3">' +
-		timeLabel +
-		'</div><textarea class="form-control ' +
-		blockColor +
-		'">' +
-		timeBlock.event +
-		'</textarea><div class="col-sm col-lg-1 input-group-append"><button class="saveBtn btn-block" type="submit"><i class="fas fa-save"></i></button></div></div></div>';
+saveBtn.on("click", function () {
+    var time = $(this).parent().attr("id");
+    var schedule = $(this).siblings(".schedule").val();
 
-	
-	$(".container").append(row);
+    localStorage.setItem(time, schedule);
 });
 
-/* Adding color to rows based on time past, present, future */
-function colorRow(time) {
-	var planNow = moment(now, "H A");
-	var planEntry = moment(time, "H A");
-	if (planNow.isBefore(planEntry) === true) {
-		return "future";
-	} else if (planNow.isAfter(planEntry) === true) {
-		return "past";
-	} else {
-		return "present";
-	}
+function pastPresentFuture() {
+    hour = time.hours();
+    $(".time-block").each(function () {
+        var thisHour = parseInt($(this).attr("id"));
+
+        if (thisHour > hour) {
+            $(this).addClass("future")
+        }
+        else if (thisHour === hour) {
+            $(this).addClass("present");
+        }
+        else {
+            $(this).addClass("past");
+        }
+    })
 }
 
-
-/* Save feature/button */
-$(".saveBtn").on("click", function() {
-	var blockID = parseInt(
-		$(this)
-			.closest(".time-block")
-			.attr("id")
-	);
-	var userEntry = $.trim(
-		$(this)
-			.parent()
-			.siblings("textarea")
-			.val()
-	);
-	planWorkday[blockID].event = userEntry;
-
-	/* Set local storage */
-	localStorage.setItem("workDay", JSON.stringify(planWorkday));
-});
+pastPresentFuture();
