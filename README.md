@@ -16,7 +16,7 @@ https://user-images.githubusercontent.com/85534144/124198689-06d49500-da86-11eb-
 
 ## Deployed Link
 
-* [See Live Site](#)
+* [See Live Site](https://htepelikian.github.io/work-day-busy-bee/)
 
 
 ## Authors
