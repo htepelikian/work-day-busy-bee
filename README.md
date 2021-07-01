@@ -20,7 +20,7 @@ https://user-images.githubusercontent.com/85534144/124198689-06d49500-da86-11eb-
 
 ## Authors
 
-* **YOUR NAME** 
+* **HRIPSIME TEPELIKIAN** 
 - [Link to Github](https://github.com/htepelikian/work-day-busy-bee.git)
 
 
