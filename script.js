@@ -1,44 +1,24 @@
-//----Variables with date format and current time display----//
-var date = moment().format("MMM Do YYYY");
-var currentTime = moment().format('H');
-console.log(currentTime);
+$(function () {});
+  
+/* Date variables displayed at top and hours */
+var today = moment().format("dddd, MMMM Do");
 
-$("#currentDay").append(date);
+var now = moment().format("H A");
 
-
-var timeOfday = ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"];
-updatetime();
-
-function updatetime() {
-  var currentTime = moment().format('H');
-  for(var i = 0; i < timeOfday.length; i++) {
-
-    if (parseInt(timeOfday[i]) > currentTime) {
-      $("#" + timeOfday[i]).attr("style", "background-color: ##77dd77");
-
-
-    }
-    else if (parseInt(timeOfday[i]) < currentTime) {
-      $("#" + timeOfday[i]).attr("style", "background-color: #d3d3d3");
-
-    }
-    else if (parseInt(timeOfday[i]) == currentTime) {
-      $("#" + timeOfday[i]).attr("style", "background-color: #ff6961");
-    
-    }
-  }
-}
-
-//--Save input to local storage---//
-$(document).on("click", ".saveBtn", function() {
-    alert("Saved!");
-    var timeOfday = $(this).parent().attr("id");
-    var textContent = $("input").val().trim();
-
-    localStorage.setItem(timeOfday, textContent);
-    localStorage.getItem(timeOfday, textContent);
-    console.log(timeOfday, textContent);
-
-    document.getElementById(timeOfday, textContent).innerHTML = localStorage.getItem(timeOfday, textContent);
-});
+/* Timeblocks */
+var plannerWorkday = [
+  { time: "8 AM", event: "" },
+  { time: "9 AM", event: "" },
+  { time: "10 AM", event: "" },
+  { time: "11 AM", event: "" },
+  { time: "12 PM", event: "" },
+  { time: "1 PM", event: "" },
+  { time: "2 PM", event: "" },
+  { time: "3 PM", event: "" },
+  { time: "4 PM", event: "" },
+  { time: "5 PM", event: "" },
+  { time: "6 PM", event: "" },
+  { time: "7 PM", event: "" },
+  { time: "8 PM", event: "" },
+];
 
