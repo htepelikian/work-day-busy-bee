@@ -30,10 +30,10 @@ function updatetime() {
 }
 
 //--Save input to local storage---//
-$(".rowBtn").on("click", function() {
+$(".saveBtn").on("click", function() {
     var timeOfday = $(this).parent().attr("id");
     var textContent = $("input").val().trim();
 
-    localStorage.setItem(timeOfday, textContent);
+    localStorage.setItem('timeOfday', 'textContent');
     console.log(timeOfday, textContent);
 });
