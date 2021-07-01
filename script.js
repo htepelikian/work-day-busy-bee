@@ -31,7 +31,7 @@ if (workEvents) {
 /* Current Day */
 $("#currentDay").text(today);
 
-/* Create rows */
+/* Create rows for time blocks */
 planWorkday.forEach(function(timeBlock, index) {
 	var timeLabel = timeBlock.time;
 	var blockColor = colorRow(timeLabel);
@@ -46,7 +46,21 @@ planWorkday.forEach(function(timeBlock, index) {
 		timeBlock.event +
 		'</textarea><div class="col-sm col-lg-1 input-group-append"><button class="saveBtn btn-block" type="submit"><i class="fas fa-save"></i></button></div></div></div>';
 
-	/* Adding rows to container div */
+	
 	$(".container").append(row);
 });
+
+/* Adding color to rows based on time past, present, future */
+function colorRow(time) {
+	var planNow = moment(now, "H A");
+	var planEntry = moment(time, "H A");
+	if (planNow.isBefore(planEntry) === true) {
+		return "future";
+	} else if (planNow.isAfter(planEntry) === true) {
+		return "past";
+	} else {
+		return "present";
+	}
+}
+
 
