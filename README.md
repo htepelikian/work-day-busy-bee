@@ -11,7 +11,7 @@ This project consists of combining HTML, CSS, and JS to make a dynamic tool: the
 
 ## Deployed Link
 
-* [See Live Site](#)
+* [See Live Site](https://htepelikian.github.io/work-day-busy-bee/)
 
 
 ## Authors
